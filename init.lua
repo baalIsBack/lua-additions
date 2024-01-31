@@ -1,5 +1,9 @@
-local relativeFolder = (...) .. "."--:match("(.-)[^%.]+$")
+if arg[2] == "debug" then
+	require("lldebugger").start()
+end
 
+
+local relativeFolder = (...) .. "."--:match("(.-)[^%.]+$")
 local function load(lib_name)
 	return require(relativeFolder..lib_name)
 end

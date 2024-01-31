@@ -1,4 +1,4 @@
-local sstring = getmetatable('')
+local sstring = getmetatable('')--super string
 
 
 function sstring:toFirstUpper()
