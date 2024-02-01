@@ -1,6 +1,6 @@
 local Prototype = require 'lua-additions.Prototype'
 
-local Singleton = Prototype:new()
+local Singleton = Prototype:new()--
 
 function Singleton:init()
 	self.contents = {}
