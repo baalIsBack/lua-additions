@@ -26,6 +26,17 @@ function Animation:init(fps, quads, loop)
 	return self
 end
 
+--[[
+	Will load all images; TODO: rename function to represent behavior better
+]]
+function Animation:quadsFromSheet(img, frameW, frameH)--
+	local quads = {}
+	for x = 0, (img:getWidth()/frameW)-1, 1 do
+		table.insert(quads, love.graphics.newQuad(x*frameW, 0*frameH, frameW, frameH, img:getWidth(), img:getHeight()))
+	end
+	return quads
+end
+
 function Animation:stop()
 	self.active = false
 	self.quad_id = 1
