@@ -35,7 +35,7 @@ function Stack:isEmpty()
 end
 
 function Stack:assertNotEmpty()
-	assert(self:isEmpty(), "Can not access elements of empty Stack.")
+	assert(not self:isEmpty(), "Can not access elements of empty Stack.")
 	return self
 end
 
