@@ -8,6 +8,14 @@ function Stack:init()
 	return self
 end
 
+function Stack:shuffle()
+	for i = #self.contents, 2, -1 do
+		local j = math.random(i)
+		self.contents[i], self.contents[j] = self.contents[j], self.contents[i]
+	end
+	return self
+end
+
 function Stack:push(element)
 	table.insert(self.contents, element)
 	return self
