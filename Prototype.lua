@@ -2,21 +2,20 @@ local Prototype = {}
 Prototype.__index = Prototype
 
 function Prototype:new()
-	local new_instance = {}
-	setmetatable(new_instance, self)
+  local new_instance = {}
+  setmetatable(new_instance, self)
 
-	new_instance.__index = new_instance
+  new_instance.__index = new_instance
 
-	return new_instance
+  return new_instance
 end
 
 function Prototype:super()
-	return getmetatable(self)
+  return getmetatable(self)
 end
 
 function Prototype:init(...)
-	return self
+  return self
 end
-
 
 return Prototype
