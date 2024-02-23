@@ -11,7 +11,7 @@ local function load(lib_name)
 end
 
 load 'sstring'
-load 'table'
+load 'stable'
 load 'extension'
 
 local init = {}

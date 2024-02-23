@@ -1,4 +1,4 @@
-local table = require 'lua-additions.table'
+local table = require 'lua-additions.stable'
 local Jobs = require 'lua-additions.Jobs'
 local Prototype = require "lua-additions.Prototype"
 local Object = require "lua-additions.Object"
@@ -17,7 +17,7 @@ function Animation:init(fps, quads, loop)
   self.jobs:every(1 / fps, function(self)
     if self.active then
       if self.quad_id == #self.quads then
-        --self.callbacks:call("finish", self)
+        self.callbacks:call("finish", self)
         if not self.loop then
           return
         end
