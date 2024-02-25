@@ -10,6 +10,10 @@ function Prototype:new()
   return new_instance
 end
 
+function Prototype:getID()
+  return "::UNDEFINED"
+end
+
 function Prototype:super()
   return getmetatable(self)
 end

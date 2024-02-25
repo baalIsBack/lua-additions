@@ -2,6 +2,10 @@ local Prototype = require 'lua-additions.Prototype'
 local cron = require 'lua-additions.cron'
 local Jobs = Prototype:new()
 
+function Jobs:getID()
+  return "Jobs"
+end
+
 function Jobs:init()
   self.jobs = {}
   return self
@@ -23,12 +27,16 @@ function Jobs:remove(job)
   return false
 end
 
+function Jobs:insert(job)
+  table.insert(self.jobs, job)
+end
+
 function Jobs:after(time, f, ...)
-  table.insert(self.jobs, cron.after(time, f, ...))
+  self:insert(cron.after(time, f, ...))
 end
 
 function Jobs:every(time, f, ...)
-  table.insert(self.jobs, cron.every(time, f, ...))
+  self:insert(cron.every(time, f, ...))
 end
 
 return Jobs
