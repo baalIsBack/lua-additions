@@ -2,7 +2,7 @@ local table = require 'lua-additions.stable'
 local Jobs = require 'lua-additions.Jobs'
 local Prototype = require "lua-additions.Prototype"
 local Object = require "lua-additions.Object"
-local Animation = Object:new()
+local Animation = Object:instantiate()
 
 function Animation:init(fps, quads, loop)
   Object.init(self)
@@ -13,7 +13,7 @@ function Animation:init(fps, quads, loop)
   end
   self.quads = quads
   self.quad_id = 1
-  self.jobs = Jobs:new():init()
+  self.jobs = Jobs:new()
   self.jobs:every(1 / fps, function(self)
     if self.active then
       if self.quad_id == #self.quads then

@@ -1,6 +1,6 @@
 local Prototype = require 'lua-additions.Prototype'
 local cron = require 'lua-additions.cron'
-local Jobs = Prototype:new()
+local Jobs = Prototype:instantiate()
 
 function Jobs:getID()
   return "Jobs"

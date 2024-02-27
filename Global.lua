@@ -1,5 +1,5 @@
 local Prototype = require 'lua-additions.Prototype'
-local Global = Prototype:new()
+local Global = Prototype:instantiate()
 Global.isSingleton = true
 
 function Global:init()
@@ -15,4 +15,4 @@ function Global:get(id)
   return self._G[id]
 end
 
-return Global:new():init()
+return Global:new()

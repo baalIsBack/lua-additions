@@ -3,7 +3,7 @@
 
 local Stack = require 'lua-additions.Stack'
 
-local Queue = Stack:new()
+local Queue = Stack:instantiate()
 
 --Functions
 function Queue:index()

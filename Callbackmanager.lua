@@ -1,5 +1,5 @@
 local Prototype = require 'lua-additions.Prototype'
-local Callbackmanager = Prototype:new()
+local Callbackmanager = Prototype:instantiate()
 
 
 function Callbackmanager:init()
