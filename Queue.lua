@@ -1,9 +1,9 @@
+local Stack = require 'lua-additions.Stack'
+local Queue = Stack:clone("Queue")
+
 --- Queue implementation using Stack with modified index
 -- @module Queue
 
-local Stack = require 'lua-additions.Stack'
-
-local Queue = Stack:instantiate()
 
 --Functions
 function Queue:index()

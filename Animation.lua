@@ -1,11 +1,12 @@
+local Object = require 'lua-additions.Object'
+local Animation = Object:clone("Animation")
+
 local table = require 'lua-additions.stable'
-local Jobs = require 'lua-additions.Jobs'
-local Prototype = require "lua-additions.Prototype"
-local Object = require "lua-additions.Object"
-local Animation = Object:instantiate()
 
 function Animation:init(fps, quads, loop)
+  local Jobs = require 'lua-additions.Jobs'
   Object.init(self)
+
   self.active = true
   self.loop = true
   if loop ~= nil then

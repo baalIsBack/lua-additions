@@ -1,10 +1,6 @@
 local Prototype = require 'lua-additions.Prototype'
-local cron = require 'lua-additions.cron'
-local Jobs = Prototype:instantiate()
+local Jobs = Prototype:clone("Jobs")
 
-function Jobs:getID()
-  return "Jobs"
-end
 
 function Jobs:init()
   self.jobs = {}
@@ -32,10 +28,12 @@ function Jobs:insert(job)
 end
 
 function Jobs:after(time, f, ...)
+  local cron = require 'lua-additions.cron'
   self:insert(cron.after(time, f, ...))
 end
 
 function Jobs:every(time, f, ...)
+  local cron = require 'lua-additions.cron'
   self:insert(cron.every(time, f, ...))
 end
 

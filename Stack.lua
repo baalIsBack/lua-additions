@@ -1,6 +1,6 @@
 local Prototype = require 'lua-additions.Prototype'
+local Stack = Prototype:clone("Stack")
 
-local Stack = Prototype:instantiate()
 
 --Methods
 function Stack:init()

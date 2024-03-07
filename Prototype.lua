@@ -1,19 +1,21 @@
-
-
 local Prototype = {}
 Prototype.__index = Prototype
 
-function Prototype:instantiate()
+function Prototype:clone(name)
   local new_instance = {}
   setmetatable(new_instance, self)
 
   new_instance.__index = new_instance
 
+  new_instance.type_name = name or new_instance:super():type()
+
+  new_instance["is" .. new_instance.type_name] = true
+
   return new_instance
 end
 
-function Prototype:getID()
-  return "::UNDEFINED"
+function Prototype:type()
+  return self.type_name
 end
 
 function Prototype:super()
@@ -25,23 +27,7 @@ function Prototype:init(...)
 end
 
 function Prototype:new(...)
-  if self.singleton_instance then
-    return self.singleton_instance
-  end
-  return self:instantiate():init(...)
-end
-
-function Prototype:singleton(...)
-  if self.singleton_instance then
-    return self.singleton_instance
-  end
-  self.singleton_instance = self:new(...)
-
-  if Global then
-    Global:set(self:getID(), self.singleton_instance)
-  end
-
-  return self.singleton_instance
+  return self:clone():init(...)
 end
 
 return Prototype
