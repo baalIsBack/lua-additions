@@ -1,22 +1,23 @@
 local Prototype = require 'lua-additions.Prototype'
 local Callbackmanager = Prototype:clone("Callbackmanager")
 
-
 function Callbackmanager:init()
   self.callbacks = {}
   return self
 end
 
+function Callbackmanager:declare(name)
+  assert(not self.callbacks[name], "Callbackmanager:declare : Callback already exists: "..name)
+  self.callbacks[name] = {}
+end
+
 function Callbackmanager:register(name, f, p1, ...)
   assert(f, "Callback requires function.")
-  if not self.callbacks[name] then
-    self.callbacks[name] = {}
-  end
+  assert(self.callbacks[name], "Callbackmanager:register : No such callback: "..name)
   local params = {}
   if p1 then
     params = {p1, ...}
   end
-  --if p1 and p1:type() == "Animation" then asd()end
   table.insert(self.callbacks[name], {f=f,params=params,})
 end
 

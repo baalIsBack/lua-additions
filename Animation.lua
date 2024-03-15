@@ -6,6 +6,7 @@ local table = require 'lua-additions.stable'
 function Animation:init(fps, quads, loop)
   local Jobs = require 'lua-additions.Jobs'
   Object.init(self)
+  self.callbacks:declare("finish")
 
   self.active = true
   self.loop = true
