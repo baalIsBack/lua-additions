@@ -1,10 +1,10 @@
 local function ID() end
 
 local cron = {
-  __VERSION     = 'cron.lua 2.0.0',
-  __DESCRIPTION = 'Time-related functions for lua',
-  __URL         = 'https://github.com/kikito/cron.lua',
-  __LICENSE     = [[
+	__VERSION     = 'cron.lua 2.0.0',
+	__DESCRIPTION = 'Time-related functions for lua',
+	__URL         = 'https://github.com/kikito/cron.lua',
+	__LICENSE     = [[
           Copyright (c) 2011 Enrique García Cota
 
           Permission is hereby granted, free of charge, to any person obtaining a
@@ -31,80 +31,80 @@ local cron = {
 -- Private functions
 
 local function isCallable(callback)
-  local tc = type(callback)
-  if tc == 'function' then return true end
-  if tc == 'table' then
-    local mt = getmetatable(callback)
-    return type(mt) == 'table' and type(mt.__call) == 'function'
-  end
-  return false
+	local tc = type(callback)
+	if tc == 'function' then return true end
+	if tc == 'table' then
+		local mt = getmetatable(callback)
+		return type(mt) == 'table' and type(mt.__call) == 'function'
+	end
+	return false
 end
 
 local function checkPositiveInteger(name, value)
-  if type(value) ~= "number" or value < 0 then
-    error(name .. " must be a positive number")
-  end
+	if type(value) ~= "number" or value < 0 then
+		error(name .. " must be a positive number")
+	end
 end
 
 local Clock = {}
 local Clock_mt = { __index = Clock }
 
 local function newClock(time, callback, update, ...)
-  checkPositiveInteger('time', time)
-  if not isCallable(callback) then
-    print("!ERROR! Callback must be a function!")
-    a = a + 1
-  end --assert(isCallable(callback), "callback must be a function")
+	checkPositiveInteger('time', time)
+	if not isCallable(callback) then
+		print("!ERROR! Callback must be a function!")
+		a = a + 1
+	end --assert(isCallable(callback), "callback must be a function")
 
-  return setmetatable({
-    time     = time,
-    callback = callback,
-    args     = { ... },
-    running  = 0,
-    update   = update,
-    load     = ID,
-  }, Clock_mt)
+	return setmetatable({
+		time     = time,
+		callback = callback,
+		args     = { ... },
+		running  = 0,
+		update   = update,
+		load     = ID,
+	}, Clock_mt)
 end
 
 local function updateAfterClock(self, dt) -- returns true if expired
-  checkPositiveInteger('dt', dt)
+	checkPositiveInteger('dt', dt)
 
-  if self.running >= self.time then return true end
+	if self.running >= self.time then return true end
 
-  self.running = self.running + dt
+	self.running = self.running + dt
 
-  if self.running >= self.time then
-    self.callback(unpack(self.args))
-    return true
-  end
-  return false
+	if self.running >= self.time then
+		self.callback(unpack(self.args))
+		return true
+	end
+	return false
 end
 
 local function updateEveryClock(self, dt)
-  checkPositiveInteger('dt', dt)
+	checkPositiveInteger('dt', dt)
 
-  self.running = self.running + dt
+	self.running = self.running + dt
 
-  while self.running >= self.time do
-    self.callback(unpack(self.args))
-    self.running = self.running - self.time
-  end
-  return false
+	while self.running >= self.time do
+		self.callback(unpack(self.args))
+		self.running = self.running - self.time
+	end
+	return false
 end
 
 function Clock:reset(running)
-  running = running or 0
-  checkPositiveInteger('running', running)
+	running = running or 0
+	checkPositiveInteger('running', running)
 
-  self.running = running
+	self.running = running
 end
 
 function cron.after(time, callback, ...)
-  return newClock(time, callback, updateAfterClock, ...)
+	return newClock(time, callback, updateAfterClock, ...)
 end
 
 function cron.every(time, callback, ...)
-  return newClock(time, callback, updateEveryClock, ...)
+	return newClock(time, callback, updateEveryClock, ...)
 end
 
 return cron

@@ -7,7 +7,7 @@ local Queue = Stack:clone("Queue")
 
 --Functions
 function Queue:index()
-  return math.min(1, #self.contents)
+	return math.min(1, #self.contents)
 end
 
 return Queue
